@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amir's Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Emblema+One&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #008b8b; /* darkcyan */
+            --secondary-color: #2c3e50;
+            --accent-color: #ff7f50;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+        
+        .navbar-brand {
+            font-size: 2.2rem;
+            font-weight: bold;
+            font-family: 'Emblema One', cursive;
+            color: var(--dark-color) !important;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand span {
+            color: var(--primary-color) !important;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-color) !important;
+            margin: 0 10px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+        
+        /* Hero Section */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #home::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(0, 139, 139, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        #home::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background-color: rgba(0, 139, 139, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            line-height: 1.2;
+        }
+        
+        .hero-content h1 span {
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .hero-content h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: rgba(0, 139, 139, 0.2);
+            z-index: -1;
+        }
+        
+        .hero-content h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .hero-image {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            border: 8px solid white;
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: all 0.5s ease;
+        }
+        
+        .hero-image img:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        
+        /* About Section */
+        #about {
+            padding: 100px 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        .section-title span {
+            color: var(--primary-color);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: #006969;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        
+        .about-image {
+            position: relative;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 8px solid white;
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        
+        .about-image:hover::before {
+            top: -15px;
+            left: -15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+        
+        footer p {
+            margin-bottom: 20px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .about-content {
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            #home {
+                padding: 120px 0 60px;
+                text-align: center;
+            }
+            
+            #home .container {
+                flex-direction: column;
+            }
+            
+            .hero-content {
+                margin-bottom: 50px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                margin-top: 40px;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .about-text h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">M H R <span>A</span> H</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#education">Education</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#achievements">Achievments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills-section">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#work-history">Job</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact-info">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1>Hi, I'm <span>Sayed Amir Hussain Najafizada</span></h1>
+                        <h2>Web Developer & Programmer</h2>
+                        <a href="#about" class="btn">Explore More</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About <span>Me</span></h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-text">
+                        <h3>Professional Summary</h3>
+                        <p>Motivated and detail-oriented developer with a passion for building modern, user-focused web applications. Skilled in front-end development using HTML, CSS, Bootstrap, and Tailwind, with ongoing experience in React, Node.js, and Django for full-stack solutions. I combine strong design sense with practical coding skills to create responsive and visually compelling websites.</p>
+                        <p>I bring hands-on experience from working at TESLA, where I was part of a fast-paced, innovation-driven environment that sharpened my problem-solving skills and taught me the value of efficiency and precision. Additionally, at TOEFL Star, I contributed to educational projects focused on digital learning solutions, further developing my technical and communication skills.</p>
+                        <p>With a background in trading and a growing interest in artificial intelligence, I aim to blend technology, data, and creativity to build impactful digital products. I’m also a dedicated learner, constantly improving my skills and working toward becoming a software engineer at top-tier companies like Google or OpenAI.</p>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Education Section -->
+<section id="education" class="py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">📚 My <span>Education</span> Journey</h2>
+        
+        <div class="education-timeline">
+            <!-- Primary School -->
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="timeline-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 class="to-left">Primary School</h3>
+                        <div class="timeline-date" style="margin-left: 2.2rem;">2008 - 2014</div>
+                        <p>I attended <strong>Ommulbelad Private High School</strong> in Mazar-e-Sharif, Afghanistan. This is where my educational journey began and I developed my foundational learning skills.</p>
+                        <div class="timeline-badge">Excellent Student Award</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Middle School -->
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="timeline-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 class="to-left">Middle School</h3>
+                        <div class="timeline-date" style="margin-left: 2.2rem;">2015 - 2018</div>
+                        <p>I continued my studies at <strong>Kaihan Noor High School</strong> in Kabul, where I built a strong foundation in mathematics, sciences, and literature.</p>
+                        <div class="timeline-badge">Top 5% of Class</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- High School -->
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="timeline-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 class="to-left">High School</h3>
+                        <div class="timeline-date" style="margin-left: 2.2rem;">2019 - 2024</div>
+                        <p>I graduated from <strong>Nawed Roshan High School</strong> with a <strong>98% academic score</strong> and was the <strong>top student</strong> in my class, specializing in science and technology subjects.</p>
+                        <div class="timeline-badge">Valedictorian</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Achievements Section -->
+<section id="achievements" class="py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">🏆 My <span>Achievements</span></h2>
+        
+        <div class="achievements-grid">
+            <!-- Achievement 1 -->
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3>Graduated as Top Student</h3>
+                    <div class="achievement-meta">2024 - 98% Academic Score</div>
+                    <p>Ranked #1 in my graduating class at Nawed Roshan High School with exceptional academic performance.</p>
+                    <div class="achievement-badge">Academic Excellence</div>
+                </div>
+            </div>
+            
+            <!-- Achievement 2 -->
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3>Math Competition Finalist</h3>
+                    <div class="achievement-meta">2019</div>
+                    <p>Selected among top 10 students in regional mathematics olympiad, solving complex problems under time pressure.</p>
+                    <div class="achievement-badge">Mathematics</div>
+                </div>
+            </div>
+            
+            <!-- Achievement 3 -->
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-microphone"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3>Debate Competition Participant</h3>
+                    <div class="achievement-meta">2022</div>
+                    <p>Represented my school in national debate championship, developing strong public speaking and critical thinking skills.</p>
+                    <div class="achievement-badge">Public Speaking</div>
+                </div>
+            </div>
+            
+            <!-- Achievement 4 -->
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3>Web Development Bootcamp</h3>
+                    <div class="achievement-meta">2024</div>
+                    <p>Completed intensive coding bootcamp, mastering HTML, CSS, JavaScript and building multiple projects.</p>
+                    <div class="achievement-badge">Tech Skills</div>
+                </div>
+            </div>
+            
+            <!-- Achievement 5 -->
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3>TOEFL iBT Score</h3>
+                    <div class="achievement-meta">2025 - 93 Overall score</div>
+                    <p>Achieved high proficiency English certification (Reading: 26, Listening: 21, Speaking: 23, Writing: 23).</p>
+                    <div class="achievement-badge">Language</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<div class="skills-section" id="skills-section">
+    <h2>💻 My Skills</h2>
+
+    <div class="skill">
+        <div class="skill-name"><i class="fab fa-html5"></i> HTML</div>
+        <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+    </div>
+
+    <div class="skill">
+        <div class="skill-name"><i class="fab fa-css3-alt"></i> CSS</div>
+        <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+    </div>
+
+    <div class="skill">
+        <div class="skill-name"><i class="fab fa-js"></i> JavaScript</div>
+        <div class="progress-bar"><div class="progress" style="width: 55%;"></div></div>
+    </div>
+
+    <div class="skill">
+        <div class="skill-name"><i class="fab fa-python"></i> Python</div>
+        <div class="progress-bar"><div class="progress" style="width: 55%;"></div></div>
+    </div>
+
+    <div class="skill">
+        <div class="skill-name"><i class="fas fa-btc"></i> Crypto</div>
+        <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
+    </div>
+
+    <div class="skill">
+        <div class="skill-name"><i class="fas fa-user-shield"></i> Cybersecurity (Kali Linux)</div>
+        <div class="progress-bar"><div class="progress" style="width: 50%;"></div></div>
+    </div>
+
+</div>
+
+
+<div class="work-history" id="work-history">
+    <h2>💼 Professional Journey</h2>
+    
+    <div class="career-path">
+        <!-- Experience 1 -->
+        <div class="job-milestone">
+            <div class="job-marker"></div>
+            <div class="job-period">04/2023 - 03/2024</div>
+            <div class="job-details">
+                <h3>English Teacher</h3>
+                <h4>TESLA Academic Association</h4>
+                <p>Mentored students in Q-Skills systems and
+                    specialized speaking classes. -  Gave constructive feedback to students to enhance
+                    their language skills. - – Designed and prepared engaging lesson plans based on
+                    the curriculum.</p>
+                <div class="job-skills">
+                    <span>English</span>
+                    <span>Speaking Classes</span>
+                    <span>Q-Skills System</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Experience 2 -->
+        <div class="job-milestone">
+            <div class="job-marker"></div>
+            <div class="job-period">06/2024 - 09/2024</div>
+            <div class="job-details">
+                <h3>Substitute Teacher</h3>
+                <h4>TOEFL Star</h4>
+                <p>Identifying students’ weaknesses and
+                    suggesting improvement strategies and evaluating writing and speaking
+                    responses based on TOEFL scoring criteria. - Ensured a productive and engaging
+                    learning environment.</p>
+                <div class="job-skills">
+                    <span>Instructor</span>
+                    <span>Assistant</span>
+                    <span>Providing Feedback</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="contact-info" id="contact-info">
+    <h2>📱 Get In Touch</h2>
+    
+    <div class="contact-grid">
+
+        <div class="contact-card">
+            <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-text">
+                <h3>Email</h3>
+                <p>amir.rezazada@gmail.com</p>
+            </div>
+        </div>
+        
+
+        <div class="contact-card">
+            <div class="contact-icon">
+                <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="contact-text">
+                <h3>Phone</h3>
+                <p>+93 771-084-078</p>
+            </div>
+        </div>
+        
+
+        <div class="contact-card">
+            <div class="contact-icon">
+                <i class="fab fa-github"></i>
+            </div>
+            <div class="contact-text">
+                <h3>GitHub</h3>
+                <a href="https://github.com/amirnajafizada" target="_blank">github.com/amirnajafizada</a>
+            </div>
+        </div>
+        
+
+        <div class="contact-card">
+            <div class="contact-icon">
+                <i class="fab fa-instagram"></i>
+            </div>
+            <div class="contact-text">
+                <h3>Instagram</h3>
+                <a href="https://www.instagram.com/a_najafizada/" target="_blank">@a-najafizada</a>
+            </div>
+        </div>
+
+
+        <div class="contact-card">
+            <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-text">
+                <h3>Location</h3>
+                <p>1st, Karte Char, Kabul, Afghanistan</p>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Amir Hussain | All Rights Reserved</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/profile.php?id=100005204655893" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/a_najafizada/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/amirnajafizada" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js">
+       
+    </script>
+</body>
+</html>
